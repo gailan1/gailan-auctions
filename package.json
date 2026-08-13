@@ -1,0 +1,16 @@
+{
+  "name": "auction-car-manager-v2",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "better-sqlite3": "^11.8.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
