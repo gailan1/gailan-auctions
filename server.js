@@ -18,4 +18,5 @@ app.post('/api/cars',auth,(req,res)=>{const c=req.body||{};const fields=['make',
 app.put('/api/cars/:id',auth,(req,res)=>{const c=req.body||{},fields=['make','model','year','vin','auction','lot','purchase','auctionFee','usTransport','shipping','localTransport','customs','repair','parts','labor','other','sale','date','notes'];const vals=fields.map(k=>c[k]??(k==='year'?null:0));db.prepare(`UPDATE cars SET ${fields.map(k=>k+'=?').join(',')} WHERE id=? AND user_id=?`).run(...vals,req.params.id,req.user.id);res.json(db.prepare('SELECT * FROM cars WHERE id=? AND user_id=?').get(req.params.id,req.user.id))});
 app.delete('/api/cars/:id',auth,(req,res)=>{db.prepare('DELETE FROM cars WHERE id=? AND user_id=?').run(req.params.id,req.user.id);res.json({ok:true})});
 app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
-app.listen(PORT,()=>console.log('Running on http://localhost:'+PORT));
+module.exports = app;
+if (require.main === module) app.listen(PORT,()=>console.log('Running on http://localhost:'+PORT));
